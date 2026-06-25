@@ -210,6 +210,7 @@ A strict system prompt defines the allowed domain — AI, Machine Learning, Data
 ## Limtations/Future work
 
 **No per-student document isolation**
+
 **No source-based filtering at query time**
 
 ---
