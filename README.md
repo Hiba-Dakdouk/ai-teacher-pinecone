@@ -182,31 +182,6 @@ Open [http://localhost:5173](http://localhost:5173)
 3. Ask questions — the teacher answers from both owner and student documents
 ---
 
-## Key Design Decisions
-
-**Why RAG instead of full document injection?**
-Injecting a full document into every prompt is expensive and fails for large documents. RAG retrieves only what's relevant — reducing token cost by ~100x and removing document size limits.
-
-**Why OpenAI embeddings with Anthropic Claude?**
-OpenAI's `text-embedding-3-small` is the industry standard for Embeddings. Claude handles generation. Best tool for each job.
-
-**Why Pinecone instead of a local vector database?**
-Local vector databases (e.g. ChromaDB) persist data to disk, which works for local development but breaks on most cloud platforms. Data is wiped on every restart or redeploy. Pinecone stores vectors in the cloud, so the knowledge base survives deployments and server restarts.
-
-**Why metadata tagging instead of separate collections?**
-Pinecone's free tier provides a single index per project. Rather than requiring a paid multi-index setup, owner and student documents are tagged with a `source` field in metadata so they coexist in one index. 
-
-**Why Docker?**
-Containerizing the backend ensures the exact same environment runs locally and in production, eliminating "works on my machine" issues.
-
-**Why a Socratic system prompt?**
-A teacher that gives direct answers produces passive learners. Guiding students to discover answers themselves produces deeper understanding and retention — the core pedagogical principle behind this project.
-
-**How off-topic questions are handled?**
-A strict system prompt defines the allowed domain — AI, Machine Learning, Data Science, and directly related mathematics and programming concepts. Claude is instructed to reject questions outside this domain regardless of whether the answer exists in uploaded documents.
-
----
-
 ## Limtations/Future work
 
 **No per-student document isolation**
